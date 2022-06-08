@@ -17,6 +17,9 @@ const resolvers = {
       }
       return User.findOne({ email: ctx.user.email });
     },
+    you: async (parent, args, ctx) => {
+      // TODO: get another user
+    },
   },
   Mutation: {
     createUser: async (parent, args) => {
@@ -47,7 +50,16 @@ const resolvers = {
       await user.save();
       return { token, user };
     },
+    createMenuEntry: async (parent, args) => {
+      // TODO: do database stuff
+    },
   },
+
+  // updateProduct: async (parent, { _id, quantity }) => {
+  //   const decrement = Math.abs(quantity) * -1;
+
+  //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+  // },
 };
 
 module.exports = resolvers;

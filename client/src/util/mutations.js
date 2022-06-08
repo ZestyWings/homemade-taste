@@ -15,3 +15,5 @@ export const LOGIN = gql`
     }
   }
 `;
+
+// TODO: Create Menu Entry

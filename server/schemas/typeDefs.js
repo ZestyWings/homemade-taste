@@ -25,6 +25,12 @@ const typeDefs = gql`
     email: String!
     lastLogin: Date!
   }
+
+  "TODO: Define the graphQL subset schema for your menu below here"
+
+  type Menu {
+    
+  }
 `;
 
 module.exports = typeDefs;

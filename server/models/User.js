@@ -1,6 +1,8 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
+// TODO: add city, phone number, and list of menu items and cook bio to the user schema
+
 const userSchema = new Schema({
   username: {
     type: String,
