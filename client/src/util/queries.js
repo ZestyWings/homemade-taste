@@ -10,3 +10,5 @@ export const ME = gql`
     }
   }
 `;
+
+// TODO: getMenuEntry
