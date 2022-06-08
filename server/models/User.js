@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+const Menu = require("./Menu");
 
 // TODO: add city, phone number, and list of menu items and cook bio to the user schema
 
@@ -25,6 +26,26 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  location: {
+    type: String,
+    required: true,
+  },
+  bio: {
+    type: String,
+  },
+  contactInfo: {
+    type: String,
+    required: true,
+  },
+  menus: [Menu.Schema],
 });
 
 userSchema.pre("save", async function (next) {
