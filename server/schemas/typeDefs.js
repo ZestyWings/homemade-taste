@@ -1,35 +1,36 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  "Unix time stamp in milliseconds."
-  scalar Date
-
-  type Query {
-    "Find the logged in user."
-    me: User
-  }
-
-  type Mutation {
-    createUser(email: String!, password: String!, username: String!): Auth
-    login(email: String!, password: String!): Auth
-  }
-
   type Auth {
-    token: String!
-    user: User!
+    token: ID
+    user: User
   }
 
   type User {
     _id: ID!
     username: String!
     email: String!
-    lastLogin: Date!
+    firstName: String!
+    lastName: String!
+    location: String!
+    bio: String
+    contactInfo: String!
+    menu: [Menu]
   }
 
-  "TODO: Define the graphQL subset schema for your menu below here"
-
   type Menu {
-    
+    _id: ID!
+  }
+
+  type Query {
+    me: User
+    menu(_id: ID!): Menu
+  }
+
+  type Mutation {
+    createUser(email: String!, password: String!, username: String!): Auth
+    login(email: String!, password: String!): Auth
+    createMenuEntry(_id: ID!): Menu
   }
 `;
 
