@@ -4,10 +4,8 @@ const {
 } = require("apollo-server-express");
 const { User } = require("../models");
 const { signToken } = require("../util/auth");
-const { dateScalar } = require("./customScalars");
 
 const resolvers = {
-  Date: dateScalar,
   Query: {
     me: async (parent, args, ctx) => {
       // if ctx.user is undefined, then no token or an invalid token was
@@ -17,9 +15,9 @@ const resolvers = {
       }
       return User.findOne({ email: ctx.user.email });
     },
-    you: async (parent, args, ctx) => {
-      // TODO: get another user
-    },
+    // you: async (parent, args, ctx) => {
+    //   // TODO: get another user
+    // },
   },
   Mutation: {
     createUser: async (parent, args) => {
@@ -50,16 +48,19 @@ const resolvers = {
       await user.save();
       return { token, user };
     },
-    createMenuEntry: async (parent, args) => {
+    createMenuEntry: async (parent, args, ctx) => {
       // TODO: do database stuff
+      if (ctx.menu) {
+        const menu = await Menu.create();
+        await Menu.findByIdAndUpdate(ctx.menu._id, {
+          $push: { menus: menu },
+        });
+        return menu;
+      }
+
+      throw new AuthenticationError("Not logged in");
     },
   },
-
-  // updateProduct: async (parent, { _id, quantity }) => {
-  //   const decrement = Math.abs(quantity) * -1;
-
-  //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-  // },
 };
 
 module.exports = resolvers;
