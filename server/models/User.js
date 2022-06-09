@@ -26,22 +26,18 @@ const userSchema = new Schema({
   },
   firstName: {
     type: String,
-    required: true,
   },
   lastName: {
     type: String,
-    required: true,
   },
   location: {
     type: String,
-    required: true,
   },
   bio: {
     type: String,
   },
   contactInfo: {
     type: String,
-    required: true,
   },
   menus: [Menu.schema],
 });
@@ -56,7 +52,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.password);
 };
 
 const User = model("User", userSchema);
