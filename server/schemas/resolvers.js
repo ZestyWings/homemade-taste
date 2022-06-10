@@ -2,7 +2,7 @@ const {
   AuthenticationError,
   UserInputError,
 } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Menu } = require("../models");
 const { signToken } = require("../util/auth");
 
 const resolvers = {
@@ -13,11 +13,21 @@ const resolvers = {
       if (!ctx.user) {
         throw new AuthenticationError("Must be logged in.");
       }
-      return User.findOne({ email: ctx.user.email });
+      return User.findOne({ email: ctx.user.email }).populate("menus");
     },
-    // you: async (parent, args, ctx) => {
-    //   // TODO: get another user
-    // },
+    getUser: async (parent, args, ctx) => {
+      // TODO: get another user
+      if (!ctx.user) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      return User.findOne({ _id: args.userId }).populate("menus");
+    },
+    getUserLocation: async (parents, { location }, ctx) => {
+      if (!ctx.user) {
+        throw new AuthenticationError("Must be logged in.");
+      }
+      return User.find({ location }).populate("menus");
+    },
   },
   Mutation: {
     createUser: async (parent, args) => {
@@ -48,17 +58,43 @@ const resolvers = {
       await user.save();
       return { token, user };
     },
-    createMenuEntry: async (parent, args, ctx) => {
-      // TODO: do database stuff
+    updateMenu: async (parent, args, ctx) => {
       if (ctx.menu) {
-        const menu = await Menu.create();
-        await Menu.findByIdAndUpdate(ctx.menu._id, {
-          $push: { menus: menu },
+        return await Menu.findByIdAndUpdate(ctx.menu._id, args, {
+          new: true,
         });
-        return menu;
       }
 
       throw new AuthenticationError("Not logged in");
+    },
+    addMenu: async (parent, args, ctx) => {
+      console.log(args);
+      if (ctx.user) {
+        const menu = await Menu.create(args);
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: ctx.user._id },
+          { $addToSet: { menus: menu._id } }
+        );
+
+        return menu;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removeMenu: async (parent, { menuId }, ctx) => {
+      if (ctx.user) {
+        const menu = await Menu.findOneAndDelete({
+          _id: menuId,
+        });
+        console.log(menuId);
+
+        await User.findOneAndUpdate(
+          { _id: ctx.user._id },
+          { $pull: { menus: menuId } }
+        );
+
+        return menu;
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };

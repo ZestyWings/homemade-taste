@@ -15,22 +15,43 @@ const typeDefs = gql`
     location: String!
     bio: String
     contactInfo: String!
-    menu: [Menu]
+    menus: [Menu]
   }
 
   type Menu {
     _id: ID!
+    name: String!
+    ingredients: String
+    dietary: String
+    allergies: String
+    item: String
   }
 
   type Query {
     me: User
-    menu(_id: ID!): Menu
+    menu(_id: ID!): [Menu]
+    getUser(userId: ID!): User
+    getUserLocation(location: String!): [User]
   }
 
   type Mutation {
-    createUser(email: String!, password: String!, username: String!): Auth
+    createUser(
+      email: String!
+      password: String!
+      username: String!
+      location: String
+    ): Auth
     login(email: String!, password: String!): Auth
     createMenuEntry(_id: ID!): Menu
+    updateMenu(_id: ID!, item: String): Menu
+    addMenu(
+      name: String!
+      item: String
+      ingredients: String
+      dietary: String
+      allergies: String
+    ): Menu
+    removeMenu(menuId: ID!, item: String): Menu
   }
 `;
 

@@ -7,14 +7,15 @@ const menuSchema = new Schema({
   },
   ingredients: {
     type: String,
-    required: true,
   },
   dietary: {
     type: String,
   },
   allergies: {
     type: String,
-    required: true,
+  },
+  item: {
+    type: String,
   },
 });
 
