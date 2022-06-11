@@ -39,7 +39,12 @@ const userSchema = new Schema({
   contactInfo: {
     type: String,
   },
-  menus: [Menu.schema],
+  menus: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Menu",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {
