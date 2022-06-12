@@ -83,6 +83,20 @@ export default function Login() {
             value={formState.password.value}
             onChange={handleInputChange}
           />
+          <div style={styles.formControl}>
+            <label htmlFor="location" style={styles.label}>
+              Location
+            </label>
+            <input 
+            disabled={loading}
+            id="new-location"
+            type="location" 
+            name="location"
+            placeholder=" Enter location"
+            value={formState.location.value}
+            onChange={handleInputChange}
+            />                     
+          </div>
         </div>
         <div style={styles.formControl}>
           <button disabled={loading} type="submit">

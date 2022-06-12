@@ -22,6 +22,8 @@ const initialFormState = {
   username: "",
   email: "",
   password: "",
+  location: "",
+  phone: "",
 };
 
 export default function SignUp() {
@@ -96,6 +98,48 @@ export default function SignUp() {
             value={formState.password.value}
             onChange={handleInputChange}
           />
+          <div style={styles.formControl}>
+            <label htmlFor="location" style={styles.label}>
+              Location
+            </label>
+            <input 
+            disabled={loading}
+            id="new-location"
+            type="location" 
+            name="location"
+            placeholder=" Enter location"
+            value={formState.location.value}
+            onChange={handleInputChange}
+            />
+            <div style={styles.formControl}>
+              <label htmlFor="phone" style={styles.label}>
+                Phone
+              </label>
+              <input
+              disabled={loading}
+              id="new-phone"
+              type="number"
+              name="phone"
+              placeholder=" Enter phone number"
+              value={formState.location.value}
+              onChange={handleInputChange}
+              />
+              <div style={styles.formControl}>
+                <label htmlFor="menu" style={styles.label}>
+                  Menu Items
+                </label>
+                <input 
+                disabled={loading}
+                id="new-menu"
+                type="text"
+                name="menu"
+                placeholder=" Enter menu items"
+                value={formState.location.value}
+                onChange={handleInputChange}
+                />
+              </div>
+              </div>
+              </div>           
         </div>
         <div style={styles.formControl}>
           <button disabled={loading} type="submit">

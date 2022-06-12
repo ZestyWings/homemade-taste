@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import RequireAuth from "./components/RequireAuth";
 import Home from "./pages/Home";
+// import SearchCity from ".pages/SearchCity";
+// import Profile from ".pages/Profile";
 import Login from "./pages/Login";
 import ProtectedPageExample from "./pages/ProtectedPageExample";
 import SignUp from "./pages/SignUp";
@@ -19,6 +21,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            {/* <Route path="/search-city" element={SearchCity />} />
+            <Route path="/profile/:userId" element={Profile />} /> */}
             {/* Use <RequiredAuth> for pages that should only be accessible to a
             user that has logged in.*/}
             <Route
