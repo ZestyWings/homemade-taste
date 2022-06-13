@@ -6,6 +6,9 @@ export default function Navbar() {
   const { isLoggedIn, logout } = useAuth();
   return (
     <nav className="navbar">
+      {/* <NavLink to="/" className="navbar-title">
+        HomeMade Taste
+      </NavLink> */}
       <NavLink to="/" className="navbar-link">
         Home
       </NavLink>
