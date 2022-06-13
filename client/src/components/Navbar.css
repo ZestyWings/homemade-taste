@@ -1,9 +1,12 @@
 .navbar {
   display: flex;
+  background-color: #9BBBFC;
+  justify-content: flex-end;
 }
-
+.navbar-title {
+  justify-content: flex-start;
+}
 .navbar-link {
-  --border: 1px solid #444;
 
   display: block;
   width: 4em;
@@ -12,8 +15,6 @@
   text-decoration: none;
   border: var(--border);
   border-left: none;
-
-  /* style button as link */
   background: none;
   cursor: pointer;
   font-size: inherit;
@@ -25,7 +26,7 @@
 }
 
 .navbar-link:hover {
-  background-color: #ddd;
+  background-color: #4741a6;
 }
 
 .navbar-link:active {
@@ -39,4 +40,35 @@
   color: white;
   background-color: #444;
   cursor: default;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #F9CE69;
+  border-color: #F9CE69;
+  color: #030303;
+}
+
+.bg-dark {
+  background-color: #4741a6!important;
+}
+.body, html {
+  background-color: #D9EFF7;
+}
+body {
+ background-color: #D9EFF7;
+}
+
+.navbar-dark .navbar-brand, .navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover {
+  color: #fff;
+}
+.navbar-brand {
+  justify-content: flex-start;
+  display: inline-block;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
 }
