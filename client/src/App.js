@@ -7,8 +7,10 @@ import Login from "./pages/Login";
 import SearchMenu from "./pages/SearchMenu";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/UpdateUser";
+import UserProfile from "./pages/UserProfile";
 import { client } from "./util/apolloClient";
 import { AuthProvider } from "./util/auth";
+import FakeProfile from "./pages/fakeProfile";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/user" element={<FakeProfile />} />
             <Route
               path="/profile"
               element={
