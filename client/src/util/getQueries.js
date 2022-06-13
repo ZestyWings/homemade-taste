@@ -1,18 +1,43 @@
-import { useQuery } from "@apollo/client";
-import { QUERY_GET_LOCATIONS } from "../util/queries";
+import { useMutation } from "@apollo/client";
+import { ADD_MENU, REMOVE_MENU, UPDATE_USER } from "../util/queries";
 
-export function useUserLocation() {
-  const getUserLocation = useQuery(QUERY_GET_LOCATIONS);
-  const getLocation = async (location) => {
+export function useUpdateUser() {
+  const [updateUser] = useMutation(UPDATE_USER);
+  const putUser = async (user) => {
     try {
-      if (!location) {
-        throw new Error("No users with that location");
+      if (!user) {
+        throw new Error("Invalid!");
       }
-      return await getUserLocation({ variables: { location } });
+      return await updateUser({ variables: { ...user } });
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(getLocation);
-  return getLocation;
+  return putUser;
+}
+
+export function useMenu() {
+  const [addMenu] = useMutation(ADD_MENU);
+  const [removeMenu] = useMutation(REMOVE_MENU);
+  const add = async (name) => {
+    try {
+      if (!name) {
+        throw new Error("Invalid menu");
+      }
+      return await addMenu({ variables: { name } });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const remove = async (menuId) => {
+    try {
+      if (!menuId) {
+        throw new Error("Invalid menu");
+      }
+      return await removeMenu({ variables: { menuId } });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return { add, remove };
 }

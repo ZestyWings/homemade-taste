@@ -23,7 +23,6 @@ const resolvers = {
       return User.findOne({ _id: args.userId }).populate("menus");
     },
     getUserLocation: async (parents, { location }, ctx) => {
-      console.log("location: ", location);
       if (!ctx.user) {
         throw new AuthenticationError("Must be logged in.");
       }
@@ -61,7 +60,7 @@ const resolvers = {
       return { token, user };
     },
     updateMenu: async (parent, args, ctx) => {
-      if (ctx.menu) {
+      if (ctx.user) {
         return await Menu.findByIdAndUpdate(ctx.menu._id, args, {
           new: true,
         });
@@ -69,8 +68,18 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+
+    updateUser: async (parent, args, ctx) => {
+      if (ctx.user) {
+        return await User.findByIdAndUpdate(ctx.user._id, args, {
+          new: true,
+        });
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+
     addMenu: async (parent, args, ctx) => {
-      console.log(args);
       if (ctx.user) {
         const menu = await Menu.create(args);
         const updatedUser = await User.findOneAndUpdate(
@@ -87,7 +96,6 @@ const resolvers = {
         const menu = await Menu.findOneAndDelete({
           _id: menuId,
         });
-        console.log(menuId);
 
         await User.findOneAndUpdate(
           { _id: ctx.user._id },

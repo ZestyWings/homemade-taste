@@ -14,7 +14,7 @@ const typeDefs = gql`
     lastName: String
     location: String
     bio: String
-    contactInfo: String
+    phone: String
     menus: [Menu]
   }
 
@@ -42,16 +42,16 @@ const typeDefs = gql`
       location: String
     ): Auth
     login(email: String!, password: String!): Auth
+
     createMenuEntry(_id: ID!): Menu
+
+    updateUser(location: String, bio: String, phone: String): User
+
     updateMenu(_id: ID!, item: String): Menu
-    addMenu(
-      name: String!
-      item: String
-      ingredients: String
-      dietary: String
-      allergies: String
-    ): Menu
-    removeMenu(menuId: ID!, item: String): Menu
+
+    addMenu(name: String!): Menu
+
+    removeMenu(menuId: ID!): Menu
   }
 `;
 

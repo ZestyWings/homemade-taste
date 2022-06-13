@@ -36,7 +36,7 @@ const userSchema = new Schema({
   bio: {
     type: String,
   },
-  contactInfo: {
+  phone: {
     type: String,
   },
   menus: [
