@@ -11,4 +11,11 @@ export const ME = gql`
   }
 `;
 
-// TODO: getMenuEntry
+export const QUERY_GET_LOCATIONS = gql`
+  query getUserLocation($location: String!) {
+    getUserLocation(location: $location) {
+      _id
+      username
+    }
+  }
+`;

@@ -10,11 +10,11 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
-    firstName: String!
-    lastName: String!
-    location: String!
+    firstName: String
+    lastName: String
+    location: String
     bio: String
-    contactInfo: String!
+    contactInfo: String
     menus: [Menu]
   }
 
