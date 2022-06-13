@@ -23,9 +23,11 @@ const resolvers = {
       return User.findOne({ _id: args.userId }).populate("menus");
     },
     getUserLocation: async (parents, { location }, ctx) => {
+      console.log("location: ", location);
       if (!ctx.user) {
         throw new AuthenticationError("Must be logged in.");
       }
+
       return User.find({ location }).populate("menus");
     },
   },
