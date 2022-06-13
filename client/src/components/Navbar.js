@@ -8,7 +8,7 @@ export default function Navbar() {
     <div>
       <header className="header">
         <nav>
-          <h1>Fausto Lopez</h1>
+          <h1>HomeMade Taste</h1>
         </nav>
       </header>
       <nav className="navbar">
