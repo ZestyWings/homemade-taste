@@ -13,12 +13,7 @@ import { useQuery } from "@apollo/client";
 
 const SearchedUsers = () => {
   const [searchInput, setSearchInput] = useState("");
-  const {
-    loading,
-    error,
-    data: searchedUsers,
-    refetch,
-  } = useQuery(QUERY_GET_LOCATIONS, {
+  const { data: searchedUsers, refetch } = useQuery(QUERY_GET_LOCATIONS, {
     variables: { location: "" },
   });
 
@@ -82,6 +77,7 @@ const SearchedUsers = () => {
                     <Card.Title>{user.username}</Card.Title>
                     <p className="small">Bio: {user.bio}</p>
                   </Card.Body>
+                  <Card.Link href="/user">Buy From {user.username}!</Card.Link>
                 </Card>
               );
             })}

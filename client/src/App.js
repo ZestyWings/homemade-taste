@@ -6,6 +6,7 @@ import RequireAuth from "./components/RequireAuth";
 import Login from "./pages/Login";
 import SearchMenu from "./pages/SearchMenu";
 import SignUp from "./pages/SignUp";
+import Profile from "./pages/UpdateUser";
 import { client } from "./util/apolloClient";
 import { AuthProvider } from "./util/auth";
 
@@ -26,6 +27,14 @@ function App() {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/profile"
+              element={
+                <RequireAuth>
+                  <Profile />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </AuthProvider>
       </Router>

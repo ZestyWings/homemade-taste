@@ -3,7 +3,7 @@
   background-color: #9BBBFC;
   justify-content: flex-end;
 }
-.navbar-title {
+header {
   justify-content: flex-start;
 }
 .navbar-link {
@@ -57,18 +57,4 @@
 }
 body {
  background-color: #D9EFF7;
-}
-
-.navbar-dark .navbar-brand, .navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover {
-  color: #fff;
-}
-.navbar-brand {
-  justify-content: flex-start;
-  display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
-  margin-right: 1rem;
-  font-size: 1.25rem;
-  line-height: inherit;
-  white-space: nowrap;
 }
